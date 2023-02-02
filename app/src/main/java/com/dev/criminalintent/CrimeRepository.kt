@@ -19,7 +19,7 @@ class CrimeRepository private constructor(context: Context) {
         .allowMainThreadQueries()
         .build()
 
-    fun getCrimes(): List<Crime> = database.crimeDao().getCrimes()
+    fun getCrimes(): Flow<List<Crime>> = database.crimeDao().getCrimes()
 
 //    suspend fun getCrime(id: UUID): Crime = database.crimeDao().getCrime(id)
 
