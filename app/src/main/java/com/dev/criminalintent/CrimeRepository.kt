@@ -7,6 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.util.Date
 
 private const val DATABASE_NAME = "crime-database"
 
@@ -29,9 +30,9 @@ class CrimeRepository private constructor(
 
     fun getCrime(id: ByteArray): Crime = database.crimeDao().getCrime(id)
 
-    fun updateCrime(title: String, isSolved: String, idByteArray: ByteArray) {
+    fun updateCrime(title: String, isSolved: String, date: Date, idByteArray: ByteArray) {
         coroutineScope.launch {
-            database.crimeDao().updateCrime(title, isSolved, idByteArray)
+            database.crimeDao().updateCrime(title, isSolved, date, idByteArray)
         }
     }
 
