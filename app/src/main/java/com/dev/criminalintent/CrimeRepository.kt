@@ -22,7 +22,7 @@ class CrimeRepository private constructor(
             CrimeDatabase::class.java,
             DATABASE_NAME
         )
-        .createFromAsset(DATABASE_NAME)
+//        .createFromAsset(DATABASE_NAME)
         .allowMainThreadQueries()
         .build()
 
@@ -34,6 +34,10 @@ class CrimeRepository private constructor(
         coroutineScope.launch {
             database.crimeDao().updateCrime(title, isSolved, date, idByteArray)
         }
+    }
+
+    fun addCrime(title: String, isSolved: String, date: Date, idByteArray: ByteArray) {
+        database.crimeDao().addCrime(title, isSolved, date, idByteArray)
     }
 
     companion object {
