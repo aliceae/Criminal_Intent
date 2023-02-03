@@ -16,4 +16,7 @@ interface CrimeDao {
 
     @Query("UPDATE crime SET title=:title, isSolved=:isSolved, date=:date WHERE id=(:idByteArray)")
     fun updateCrime(title: String, isSolved: String, date: Date, idByteArray: ByteArray)
+
+    @Query("INSERT into crime VALUES (:idByteArray,:title,:date,:isSolved)")
+    fun addCrime(title: String, isSolved: String, date: Date, idByteArray: ByteArray)
 }
