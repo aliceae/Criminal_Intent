@@ -38,7 +38,7 @@ class CrimeDetailViewModel(crimeId: UUID) : ViewModel() {
             val bb = ByteBuffer.wrap(ByteArray(16))
             bb.putLong(it.id.mostSignificantBits)
             bb.putLong(it.id.leastSignificantBits)
-            crimeRepository.updateCrime(it.title, it.isSolved.toString(), bb.array())
+            crimeRepository.updateCrime(it.title, it.isSolved.toString(), it.date, bb.array())
         }
     }
 }
