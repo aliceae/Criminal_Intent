@@ -1,14 +1,15 @@
 package com.dev.criminalintent.database
 
 import androidx.room.TypeConverter
-import java.util.Date
-import java.util.UUID
+import java.nio.ByteBuffer
+import java.util.*
 
 class CrimeTypeConverters {
 
     @TypeConverter
     fun toId(idBlob:ByteArray):UUID {
-        return UUID.nameUUIDFromBytes(idBlob)
+        val bb = ByteBuffer.wrap(idBlob)
+        return UUID(bb.long, bb.long)
     }
 
     @TypeConverter
