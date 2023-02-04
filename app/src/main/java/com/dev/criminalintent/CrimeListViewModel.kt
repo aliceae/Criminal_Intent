@@ -30,6 +30,6 @@ class CrimeListViewModel : ViewModel() {
         val bb = ByteBuffer.wrap(ByteArray(16))
         bb.putLong(crime.id.mostSignificantBits)
         bb.putLong(crime.id.leastSignificantBits)
-        crimeRepository.addCrime(crime.title,crime.isSolved.toString(),crime.date,bb.array())
+        crimeRepository.addCrime(crime.title,crime.isSolved.toString(),crime.date,bb.array(),crime.suspect)
     }
 }

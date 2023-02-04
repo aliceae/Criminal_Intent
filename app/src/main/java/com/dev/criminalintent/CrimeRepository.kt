@@ -3,6 +3,7 @@ package com.dev.criminalintent
 import android.content.Context
 import androidx.room.Room
 import com.dev.criminalintent.database.CrimeDatabase
+import com.dev.criminalintent.database.migration1_2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -23,6 +24,7 @@ class CrimeRepository private constructor(
             DATABASE_NAME
         )
 //        .createFromAsset(DATABASE_NAME)
+        .addMigrations(migration1_2)
         .allowMainThreadQueries()
         .build()
 
@@ -36,8 +38,14 @@ class CrimeRepository private constructor(
         }
     }
 
-    fun addCrime(title: String, isSolved: String, date: Date, idByteArray: ByteArray) {
-        database.crimeDao().addCrime(title, isSolved, date, idByteArray)
+    fun addCrime(
+        title: String,
+        isSolved: String,
+        date: Date,
+        idByteArray: ByteArray,
+        suspect: String
+    ) {
+        database.crimeDao().addCrime(title, isSolved, date, idByteArray, suspect)
     }
 
     companion object {
