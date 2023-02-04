@@ -14,9 +14,19 @@ interface CrimeDao {
     @Query("SELECT * FROM crime WHERE id=(:idByteArray)")
     fun getCrime(idByteArray: ByteArray): Crime
 
-    @Query("UPDATE crime SET title=:title, isSolved=:isSolved, date=:date WHERE id=(:idByteArray)")
-    fun updateCrime(title: String, isSolved: String, date: Date, idByteArray: ByteArray)
+    @Query("UPDATE crime SET title=:title, isSolved=:isSolved, date=:date, suspect=:suspect,photoFileName=:photoFileName WHERE id=(:idByteArray)")
+    fun updateCrime(
+        title: String, isSolved: String, date: Date, idByteArray: ByteArray, suspect: String,
+        photoFileName: String?
+    )
 
-    @Query("INSERT into crime VALUES (:idByteArray,:title,:date,:isSolved,:suspect)")
-    fun addCrime(title: String, isSolved: String, date: Date, idByteArray: ByteArray, suspect: String)
+    @Query("INSERT into crime VALUES (:idByteArray,:title,:date,:isSolved,:suspect,:photoFileName)")
+    fun addCrime(
+        title: String,
+        isSolved: String,
+        date: Date,
+        idByteArray: ByteArray,
+        suspect: String,
+        photoFileName: String?
+    )
 }

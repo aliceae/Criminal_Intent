@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.dev.criminalintent.database.CrimeDatabase
 import com.dev.criminalintent.database.migration1_2
+import com.dev.criminalintent.database.migration2_3
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -24,7 +25,7 @@ class CrimeRepository private constructor(
             DATABASE_NAME
         )
 //        .createFromAsset(DATABASE_NAME)
-        .addMigrations(migration1_2)
+        .addMigrations(migration1_2, migration2_3)
         .allowMainThreadQueries()
         .build()
 
@@ -32,9 +33,17 @@ class CrimeRepository private constructor(
 
     fun getCrime(id: ByteArray): Crime = database.crimeDao().getCrime(id)
 
-    fun updateCrime(title: String, isSolved: String, date: Date, idByteArray: ByteArray) {
+    fun updateCrime(
+        title: String,
+        isSolved: String,
+        date: Date,
+        idByteArray: ByteArray,
+        suspect: String,
+        photoFileName: String?
+    ) {
         coroutineScope.launch {
-            database.crimeDao().updateCrime(title, isSolved, date, idByteArray)
+            database.crimeDao()
+                .updateCrime(title, isSolved, date, idByteArray, suspect, photoFileName)
         }
     }
 
@@ -43,9 +52,10 @@ class CrimeRepository private constructor(
         isSolved: String,
         date: Date,
         idByteArray: ByteArray,
-        suspect: String
+        suspect: String,
+        photoFileName: String?
     ) {
-        database.crimeDao().addCrime(title, isSolved, date, idByteArray, suspect)
+        database.crimeDao().addCrime(title, isSolved, date, idByteArray, suspect, photoFileName)
     }
 
     companion object {
