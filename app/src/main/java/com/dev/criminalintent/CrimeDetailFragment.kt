@@ -11,7 +11,11 @@ import java.util.*
 
 
 class CrimeDetailFragment : Fragment() {
-    private lateinit var binding: FragmentCrimeDetailBinding
+    private var _binding:FragmentCrimeDetailBinding? = null
+    private val binding
+        get() = checkNotNull(_binding) {
+            "Cannot Access binding because it's null."
+        }
     private lateinit var crime: Crime
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +33,7 @@ class CrimeDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCrimeDetailBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentCrimeDetailBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -50,6 +54,11 @@ class CrimeDetailFragment : Fragment() {
                 crime = crime.copy(isSovlved = isChecked)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
