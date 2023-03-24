@@ -7,5 +7,5 @@ data class Crime(
     val id: UUID,
     val title: String,
     val date: Date,
-    val isSovlved: Boolean
+    val isSolved: Boolean
 )
