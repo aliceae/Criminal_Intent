@@ -51,7 +51,7 @@ class CrimeDetailFragment : Fragment() {
             }
 
             crimeSolved.setOnCheckedChangeListener{ _, isChecked->
-                crime = crime.copy(isSovlved = isChecked)
+                crime = crime.copy(isSolved = isChecked)
             }
         }
     }
